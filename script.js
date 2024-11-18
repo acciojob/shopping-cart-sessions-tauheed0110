@@ -24,17 +24,13 @@ function renderProducts() {
 
 // Render cart list
 function renderCart() {
+    cartList.innerHTML='';
     const data = JSON.parse(sessionStorage.getItem('cartData')) || [];
-    if (data.length == 0) {
-        cartList.innerHTML = '<p>The cart is empty</p>'
-    } else {
-        cartList.innerHTML='';
-        data.forEach((product) => {
-            const li = document.createElement("li");
-            li.innerHTML = `${product.name} - $${product.price} <button onclick="removeFromCart(${product.id})">Remove from Cart</button>`;
-            cartList.appendChild(li);
-        });
-    }
+    data.forEach((product) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${product.name} - $${product.price} <button onclick="removeFromCart(${product.id})">Remove from Cart</button>`;
+        cartList.appendChild(li);
+    });
 
 }
 
