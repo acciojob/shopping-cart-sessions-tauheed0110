@@ -25,7 +25,7 @@ function renderProducts() {
 // Render cart list
 function renderCart() {
     cartList.innerHTML='';
-    const data = JSON.parse(sessionStorage.getItem('cartData')) || [];
+    const data = JSON.parse(sessionStorage.getItem('cart')) || [];
     data.forEach((product) => {
         const li = document.createElement("li");
         li.innerHTML = `${product.name} - $${product.price} <button onclick="removeFromCart(${product.id})">Remove from Cart</button>`;
@@ -36,19 +36,19 @@ function renderCart() {
 
 // Add item to cart
 function addToCart(productId) {
-    const data = JSON.parse(sessionStorage.getItem('cartData')) || [];
+    const data = JSON.parse(sessionStorage.getItem('cart')) || [];
     data.push(products[productId-1]);
-    sessionStorage.setItem('cartData', JSON.stringify(data));
+    sessionStorage.setItem('cart', JSON.stringify(data));
     renderCart();
 }
 
 // Remove item from cart
 function removeFromCart(productId) {
-    let data = JSON.parse(sessionStorage.getItem('cartData'));
+    let data = JSON.parse(sessionStorage.getItem('cart'));
     data = data.filter(product => {
         return productId != product.id;
     })
-    sessionStorage.setItem('cartData', JSON.stringify(data));
+    sessionStorage.setItem('cart', JSON.stringify(data));
     renderCart();
 }
 
