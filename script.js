@@ -1,6 +1,4 @@
-// This is the boilerplate code given for you
-// You can modify this code
-// Product data
+
 const products = [
     { id: 1, name: "Product 1", price: 10 },
     { id: 2, name: "Product 2", price: 20 },
@@ -37,8 +35,14 @@ function renderCart() {
 // Add item to cart
 function addToCart(productId) {
     const data = JSON.parse(sessionStorage.getItem('cart')) || [];
-    data.push(products[productId-1]);
-    sessionStorage.setItem('cart', JSON.stringify(data));
+    
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        data.push(product);
+        console.log("After adding product:", data);
+        sessionStorage.setItem('cart', JSON.stringify(data));
+    }
+    
     renderCart();
 }
 
